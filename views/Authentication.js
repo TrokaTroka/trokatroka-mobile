@@ -37,24 +37,30 @@ const styles = StyleSheet.create({
 	},
 	inputSection: {
 		backgroundColor: "#fff",
-		height: "100%",
+		height: "50%",
 		width: "100%",
 		flex: 1,
 		justifyContent: "center",
 		alignSelf: "center",
 		alignItems: "center",
+		marginBottom: "100%",
+		marginTop: "25%"
 	},
 	input: {
-		height: 40,
+		height: 50,
 		borderWidth: 1,
 		borderRadius: 3,
+		borderColor: "#a8a8a8",
+		fontSize: 16,
+		color: "#1f1f1f",
 		padding: 5,
 		width: 300,
 		margin: 5,
 		textAlign: "left",
 	},
 	btn: {
-		margin: 5
+		margin: 10,
+		height: 50
 	},
 
 });
