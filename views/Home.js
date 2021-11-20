@@ -13,14 +13,11 @@ import BookList from "../components/BookList";
 
 import { connect } from "react-redux";
 import {bookFilter} from "../redux/filters/BookFilter";
+import {getBooks} from "../redux/actions/BookAction";
 
 const Home = ({ navigation, route }) => {
 
-	const [filtered, setFiltered] = React.useState(null);
-
-	const showDetails = (id) => {
-		navigation.navigate("TradeDetails", {user: {id: id}});
-	};
+	const [filter, setFilter] = React.useState("");
 
 
 	return (
@@ -29,7 +26,7 @@ const Home = ({ navigation, route }) => {
 				<TextInput
 					style={styles.searchInput}
 					placeholder="Search for a book"
-					onChangeText={(value) => setFiltered(value)}
+					onChangeText={(value) => setFilter(value)}
 				/>
 				<Ionicons
 					style={styles.searchIcon}
@@ -38,7 +35,7 @@ const Home = ({ navigation, route }) => {
 					color={"#000"}
 				/>
 			</View>
-			<BookList />
+			<BookList filter={filter}/>
 		</View>
 	);
 };
@@ -81,4 +78,6 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default connect(bookFilter, {})(Home);
+
+
+export default connect(bookFilter, {getBooks})(Home);
