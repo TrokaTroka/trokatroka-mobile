@@ -6,16 +6,26 @@ import Authentication from "./views/Authentication";
 import HomeTabs from "./HomeTabs";
 import TradeDetails from "./views/TradeDetails";
 
+//Redux
+import {Provider} from "react-redux";
+import {store, persistor} from './redux/store';
+import { PersistGate } from "redux-persist/integration/react";
+
+
 const Stack = createNativeStackNavigator();
 const App = () => {
 	return (
-		<NavigationContainer>
-			<Stack.Navigator initialRouteName="Authentication" screenOptions={{headerShown: false}}>
-					<Stack.Screen name="Authentication" component={Authentication} />
-					<Stack.Screen name="HomeTabs" component={HomeTabs} />
-					<Stack.Screen name="TradeDetails" component={TradeDetails} options={{headerShown: true, headerTitle: "Detalhes"}} />
-			</Stack.Navigator>
-		</NavigationContainer>
+		<Provider store={store}>
+			<PersistGate loading={null} persistor={persistor} >
+				<NavigationContainer>
+					<Stack.Navigator initialRouteName="Authentication" screenOptions={{headerShown: false}}>
+							<Stack.Screen name="Authentication" component={Authentication} />
+							<Stack.Screen name="HomeTabs" component={HomeTabs} />
+							<Stack.Screen name="TradeDetails" component={TradeDetails} options={{headerShown: true, headerTitle: "Detalhes"}} />
+					</Stack.Navigator>
+				</NavigationContainer>
+			</PersistGate>
+		</Provider>
 	);
 };
 

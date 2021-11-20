@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, StyleSheet, Pressable } from "react-native";
+import { theme } from '../styles/theme.js';
 
 const defaultProps = {
 	width: 300,
@@ -26,9 +27,9 @@ const btnStyles = {
 	primary: {
 		alignItems: "center",
 		justifyContent: "center",
-		backgroundColor: "#Ef5D60",
+		backgroundColor: theme.colors.red100,
 		borderWidth: "1px",
-		borderColor: "#EF5D60",
+		borderColor: theme.colors.red100,
 		borderRadius: "5px",
 		color: "white",
 		width: defaultProps.width,
@@ -39,7 +40,7 @@ const btnStyles = {
 		justifyContent: "center",
 		backgroundColor: "#fff",
 		borderWidth: "1px",
-		borderColor: "#EF5D60",
+		borderColor: theme.colors.red100,
 		borderRadius: "5px",
 		color: "white",
 		width: defaultProps.width,

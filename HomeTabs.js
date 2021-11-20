@@ -3,8 +3,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet } from "react-native";
 
 import Home from "./views/Home";
-import {Ionicons} from '@expo/vector-icons'; 
 import TradeHistory from "./views/TradeHistory";
+import BookForm from "./views/BookForm";
+import { theme } from './styles/theme.js';
+
+import {Ionicons} from '@expo/vector-icons'; 
 
 const Tab = createBottomTabNavigator();
 
@@ -16,7 +19,12 @@ const routeIconConfig = {
 	},
 	TradeHistory: {
 		getIcon: (focused) => {
-			return focused ? 'repeat-outline' : 'repeat-outline' 
+			return focused ? 'swap-horizontal' : 'swap-horizontal' 
+		}
+	},
+	BookForm: {
+		getIcon: (focused) => {
+			return focused ? 'add-circle' : 'add-circle-outline'
 		}
 	}
 }
@@ -35,6 +43,7 @@ const HomeTabs = () => {
 				tabBarStyle: styles.tabBarStyle,
 				tabBarShowLabel: false})}>
 				<Tab.Screen name="Home" component={Home} />
+				<Tab.Screen name="BookForm" component={BookForm} />
 				<Tab.Screen name="TradeHistory" component={TradeHistory} />
 			</Tab.Navigator>
 	);
@@ -43,7 +52,7 @@ const HomeTabs = () => {
 
 const styles = StyleSheet.create({
 	tabBarStyle: {
-		backgroundColor: "#ef5d60",
+		backgroundColor: theme.colors.red100,
 	}
 });
 
