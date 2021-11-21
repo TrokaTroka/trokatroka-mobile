@@ -14,7 +14,6 @@ const Tab = createBottomTabNavigator();
 const routeIconConfig = {
 	Home: {
 		getIcon: (focused, color, size) => {
-			console.log(focused, color, size);
 			return <Ionicons name={focused ? 'home-sharp' : 'home-outline'  } size={size} color={color}/>
 		}
 	},
