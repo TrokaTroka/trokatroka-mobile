@@ -17,8 +17,8 @@ const BookForm = ({ id, navigation, route }) => {
 						</Text>
 					</View>
 				</Card>
-				<TextInput placeholder="Título" style={styles.input} />
-				<TextInput placeholder="Motivo" style={styles.input} />
+				<TextInput placeholder="Título" style={styles.input} multiline={true} maxLength={80}/>
+				<TextInput placeholder="Motivo" style={styles.input} multiline={true} maxLength={100}/>
 			</View>
 		</View>
 	);

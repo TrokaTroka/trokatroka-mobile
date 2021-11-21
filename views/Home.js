@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
 	StyleSheet,
 	Text,
@@ -13,12 +13,10 @@ import BookList from "../components/BookList";
 
 import { connect } from "react-redux";
 import {bookFilter} from "../redux/filters/BookFilter";
-import {getBooks} from "../redux/actions/BookAction";
 
-const Home = ({ navigation, route }) => {
+const Home = ({ navigation }) => {
 
 	const [filter, setFilter] = React.useState("");
-
 
 	return (
 		<View style={styles.container}>
@@ -35,7 +33,7 @@ const Home = ({ navigation, route }) => {
 					color={"#000"}
 				/>
 			</View>
-			<BookList filter={filter}/>
+			<BookList filter={filter} navigation={navigation}/>
 		</View>
 	);
 };
@@ -80,4 +78,4 @@ const styles = StyleSheet.create({
 
 
 
-export default connect(bookFilter, {getBooks})(Home);
+export default connect(bookFilter, {})(Home);

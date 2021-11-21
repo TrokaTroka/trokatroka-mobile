@@ -69,6 +69,6 @@ export function saveBook(book) {
 export function filterBook(field, value) {
 	return {
 		type: BOOK_ACTIONS.FILTER_BOOK,
-		content: { field, value },
+		content: { field: field, value: value},
 	};
 }

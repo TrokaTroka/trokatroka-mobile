@@ -15,7 +15,7 @@ import { connect } from "react-redux";
 import Card from "../components/Card";
 import Rating from "../components/Rating";
 
-const BookList = ({ getBooks, bookList, filter }) => {
+const BookList = ( { navigation, getBooks, bookList, filter }) => {
 	React.useEffect(() => {
 		getBooks();
 	}, []);
@@ -51,9 +51,9 @@ const BookList = ({ getBooks, bookList, filter }) => {
 			<FlatList
 				initialNumToRender={5}
 				style={styles.flatList}
-				keyExtractor={(item) => item.id}
+				keyExtractor={(item) => item.id.toString()}
 				data={bookList.filter((book) =>
-					book.title.toLowerCase().includes(filter.toLowerCase())
+					book.title.toLowerCase().includes(''.toLowerCase())
 				)}
 				renderItem={renderItem}
 				contentContainerStyle={styles.bookList}
@@ -91,12 +91,13 @@ const styles = StyleSheet.create({
 		flexDirection: "row-reverse",
 		justifyContent: "space-around",
 		width: "100%",
-		alignItems: "flex-start",
+		alignItems: "flex-end",
 		alignSelf: "flex-end",
 	},
 	userName: {
         overflow: "hidden",
-		width: "70%"
+		width: "70%",
+		color: "#9e9e9e"
 	},
 	bookTitle: {
         overflow: "hidden",
