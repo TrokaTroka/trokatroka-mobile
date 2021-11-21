@@ -3,7 +3,7 @@ import { BOOK_ACTIONS } from "../actions/BookAction";
 const bookState = {
 	bookList: [],
 	bookItem: {},
-	bookFiltered: {},
+	bookFiltered: {field: "", value: ""},
 };
 
 export default function bookReducer(state = bookState, dispatch) {
@@ -33,7 +33,7 @@ export default function bookReducer(state = bookState, dispatch) {
         case BOOK_ACTIONS.FILTER_BOOK:
             return {
                 ...state,
-                bookFiltered: [...dispatch.content],
+                bookFiltered: dispatch.content,
             };
 		default:
 			return state;

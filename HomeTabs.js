@@ -13,18 +13,19 @@ const Tab = createBottomTabNavigator();
 
 const routeIconConfig = {
 	Home: {
-		getIcon: (focused) => {
-			return focused ? 'home-sharp' : 'home-outline' 
+		getIcon: (focused, color, size) => {
+			console.log(focused, color, size);
+			return <Ionicons name={focused ? 'home-sharp' : 'home-outline'  } size={size} color={color}/>
 		}
 	},
 	TradeHistory: {
-		getIcon: (focused) => {
-			return focused ? 'swap-horizontal' : 'swap-horizontal' 
+		getIcon: (focused, color, size) => {
+			return <Ionicons name={focused ? 'swap-vertical' : 'swap-horizontal' } size={size}  color={color}/>
 		}
 	},
 	BookForm: {
-		getIcon: (focused) => {
-			return focused ? 'add-circle' : 'add-circle-outline'
+		getIcon: (focused, color, size) => {
+			return <Ionicons name={focused ? 'add-circle' : 'add-circle-outline'} size={size}  color={color}/>
 		}
 	}
 }
@@ -34,11 +35,9 @@ const HomeTabs = () => {
 	return (
 			<Tab.Navigator initialRouteName="Home" screenOptions={({route}) => ({
 
-                tabBarIcon: ({ focused, color, size }) => {
-					return <Ionicons name={routeIconConfig[route.name].getIcon(focused)} size={size} color={color} />;
-				},
-				tabBarActiveTintColor: '#FFF',
-          		tabBarInactiveTintColor: '#000',
+                tabBarIcon: ({ focused, color, size }) => (routeIconConfig[route.name].getIcon(focused, color, size)),
+				tabBarActiveTintColor: "#fff",
+          		tabBarInactiveTintColor: "#fff",
 				headerShown: false,
 				tabBarStyle: styles.tabBarStyle,
 				tabBarShowLabel: false})}>
@@ -53,7 +52,7 @@ const HomeTabs = () => {
 const styles = StyleSheet.create({
 	tabBarStyle: {
 		backgroundColor: theme.colors.red100,
-	}
+	},
 });
 
 

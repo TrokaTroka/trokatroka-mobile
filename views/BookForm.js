@@ -4,8 +4,10 @@ import { StyleSheet, Text, View, TextInput, Platform } from "react-native";
 import Card from "../components/Card";
 
 import { theme } from "../styles/theme.js";
+import { Camera } from 'expo-camera';
 
 const BookForm = ({ id, navigation, route }) => {
+	
 	return (
 		<View style={styles.container}>
 			<View style={styles.form}>

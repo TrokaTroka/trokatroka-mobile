@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import {
 	StyleSheet,
 	FlatList,
-	SafeAreaView,
 	View,
 	Text,
 	Image,
+	Platform
 } from "react-native";
 //REDUX
 import { bookFilter } from "../redux/filters/BookFilter";
@@ -14,8 +14,12 @@ import { connect } from "react-redux";
 
 import Card from "../components/Card";
 import Rating from "../components/Rating";
+import { useNavigation } from '@react-navigation/native';
 
-const BookList = ( { navigation, getBooks, bookList, filter }) => {
+const BookList = ( { getBooks, bookList, filter }) => {
+
+	const navigation = useNavigation();
+
 	React.useEffect(() => {
 		getBooks();
 	}, []);
@@ -47,24 +51,23 @@ const BookList = ( { navigation, getBooks, bookList, filter }) => {
 	};
 
 	return (
-		<SafeAreaView style={styles.list}>
+		<View style={styles.list}>
 			<FlatList
 				initialNumToRender={5}
 				style={styles.flatList}
 				keyExtractor={(item) => item.id.toString()}
 				data={bookList.filter((book) =>
-					book.title.toLowerCase().includes(''.toLowerCase())
+					book.title.toLowerCase().includes(filter.toLowerCase())
 				)}
 				renderItem={renderItem}
 				contentContainerStyle={styles.bookList}
 			/>
-		</SafeAreaView>
+		</View>
 	);
 };
 
 const styles = StyleSheet.create({
 	bookList: {
-		marginTop: 60,
 		flexDirection: "column",
 		justifyContent: "center",
 		alignItems: "center",
@@ -115,8 +118,11 @@ const styles = StyleSheet.create({
 		width: "100%",
 	},
 	list: {
+		marginTop: 110,
 		flex: 1,
 		height: "100%",
+    	backgroundColor: "white",
+    	paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
 	},
 	image: {
 		alignSelf: "flex-end",

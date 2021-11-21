@@ -14,7 +14,7 @@ import BookList from "../components/BookList";
 import { connect } from "react-redux";
 import {bookFilter} from "../redux/filters/BookFilter";
 
-const Home = ({ navigation }) => {
+const Home = ({navigation}) => {
 
 	const [filter, setFilter] = React.useState("");
 
@@ -33,7 +33,7 @@ const Home = ({ navigation }) => {
 					color={"#000"}
 				/>
 			</View>
-			<BookList filter={filter} navigation={navigation}/>
+			<BookList filter={filter} />
 		</View>
 	);
 };
