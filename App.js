@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Authentication from "./views/Authentication";
 import HomeTabs from "./HomeTabs";
 import TradeDetails from "./views/TradeDetails";
-
+import BookCamera from "./views/BookCamera";
 //Redux
 import {Provider} from "react-redux";
 import {store, persistor} from './redux/store';
@@ -22,6 +22,8 @@ const App = () => {
 							<Stack.Screen name="Authentication" component={Authentication} />
 							<Stack.Screen name="HomeTabs" component={HomeTabs} />
 							<Stack.Screen name="TradeDetails" component={TradeDetails} options={{headerShown: true, headerTitle: "Detalhes"}} />
+							<Stack.Screen name="BookCamera" component={BookCamera} options={{headerShown: true, headerTitle: "Fotos livro"}} />
+
 					</Stack.Navigator>
 				</NavigationContainer>
 			</PersistGate>

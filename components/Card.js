@@ -3,7 +3,7 @@ import { StyleSheet, View, Pressable } from "react-native";
 
 const Card = ({ children, onPress, style }) => {
 	return (
-		<View style={[styles.card, styles.shadowProp]}>
+		<View style={[styles.card, styles.shadowProp, style]}>
 			<Pressable style={styles.pressable} onPress={onPress}>
 				{children}
 			</Pressable>

@@ -7,7 +7,7 @@ import TradeHistory from "./views/TradeHistory";
 import BookForm from "./views/BookForm";
 import { theme } from './styles/theme.js';
 
-import {Ionicons} from '@expo/vector-icons'; 
+import {Ionicons, MaterialCommunityIcons} from '@expo/vector-icons'; 
 
 const Tab = createBottomTabNavigator();
 
@@ -19,7 +19,7 @@ const routeIconConfig = {
 	},
 	TradeHistory: {
 		getIcon: (focused, color, size) => {
-			return <Ionicons name={focused ? 'swap-vertical' : 'swap-horizontal' } size={size}  color={color}/>
+			return <MaterialCommunityIcons name={focused ? 'swap-horizontal-circle' : 'swap-horizontal-circle-outline' } size={size}  color={color}/>
 		}
 	},
 	BookForm: {

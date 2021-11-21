@@ -11,14 +11,14 @@ const Button = ({ onPress, title, name, style, textStyle, color}) => {
 	return (
 		<Pressable
 			onPress={onPress}
-			style={StyleSheet.flatten([
+			style={[
 				{
 					...btnStyles[name ? name : "primary"],
 				},
 				style,
-			])}
+			] }
 		>
-			<Text style={StyleSheet.flatten([textStyle, color ? {color: color} : {}])} >{title}</Text>
+			<Text style={[textStyle, color ? {color: color} : {}]} >{title}</Text>
 		</Pressable>
 	);
 };
