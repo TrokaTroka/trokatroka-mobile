@@ -7,7 +7,7 @@ const defaultProps = {
 	height: 40,
 };
 
-const Button = ({ onPress, title, name, style, textStyle, color}) => {
+const Button = ({ onPress, title, name, style, textStyle, color, children}) => {
 	return (
 		<Pressable
 			onPress={onPress}
@@ -18,7 +18,7 @@ const Button = ({ onPress, title, name, style, textStyle, color}) => {
 				style,
 			] }
 		>
-			<Text style={[textStyle, color ? {color: color} : {}]} >{title}</Text>
+			<Text style={[textStyle, color ? {color: color} : {}]} >{children ? children : title}</Text>
 		</Pressable>
 	);
 };

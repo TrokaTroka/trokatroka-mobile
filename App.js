@@ -6,6 +6,7 @@ import Authentication from "./views/Authentication";
 import HomeTabs from "./HomeTabs";
 import TradeDetails from "./views/TradeDetails";
 import BookCamera from "./views/BookCamera";
+import ImagePreview from "./views/ImagePreview";
 //Redux
 import {Provider} from "react-redux";
 import {store, persistor} from './redux/store';
@@ -23,7 +24,7 @@ const App = () => {
 							<Stack.Screen name="HomeTabs" component={HomeTabs} />
 							<Stack.Screen name="TradeDetails" component={TradeDetails} options={{headerShown: true, headerTitle: "Detalhes"}} />
 							<Stack.Screen name="BookCamera" component={BookCamera} options={{headerShown: true, headerTitle: "Fotos livro"}} />
-
+							<Stack.Screen name="ImagePreview" component={ImagePreview} options={{headerShown: true, headerTitle: "Fotos"}} />
 					</Stack.Navigator>
 				</NavigationContainer>
 			</PersistGate>

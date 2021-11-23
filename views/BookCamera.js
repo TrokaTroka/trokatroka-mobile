@@ -1,20 +1,25 @@
-import React, { useState, useEffect, useRef } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { Camera } from "expo-camera";
-import { theme } from "../styles/theme";
-import Button from "../components/Button";
+import React, { useState, useEffect, useRef } from 'react';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import { Camera } from 'expo-camera';
+import { theme } from '../styles/theme';
+import Button from '../components/Button';
+import {MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'; 
+import {useNavigation} from '@react-navigation/native';
 
-const BookCamera = ({ active }) => {
+const BookCamera = () => {
 	const [hasPermission, setHasPermission] = useState(null);
 	const [type, setType] = useState(Camera.Constants.Type.back);
 	const [ready, setReady] = useState(false);
+	const [image, setImage] = useState('');
+
+	const navigation = useNavigation();
 
 	const camRef = useRef(null);
 
 	useEffect(() => {
 		(async () => {
 			const { status } = await Camera.requestPermissionsAsync();
-			setHasPermission(status === "granted");
+			setHasPermission(status === 'granted');
 		})();
 	}, []);
 
@@ -31,19 +36,25 @@ const BookCamera = ({ active }) => {
 		}
 		if (camRef) {
 			const photo = await camRef.current.takePictureAsync();
-			console.log(photo);
+			setImage(photo);
+			console.log(photo)
+			navigation.navigate('ImagePreview', {photo: photo});
 		}
 	}
 	return (
-		<View style={[styles.container, { width: "100%" }]}>
+		<View style={[styles.container, { width: '100%' }]}>
 			<Camera
 				ref={camRef}
 				style={styles.camera}
+				pictureSize={'241x346'}
 				type={type}
 				onCameraReady={() => {
 					setReady(true);
 				}}
+				onBarCodeScanned={(e) => {console.log(e)}}
 			>
+				<View style={{alignSelf: 'center'}}><Text style={styles.text}>Posicione o livro dentro do retângulo</Text></View>
+				<View style={styles.camMask} />
                 <View style={styles.buttonContainer}>
 					<Button
 						style={styles.button}
@@ -54,15 +65,15 @@ const BookCamera = ({ active }) => {
 									: Camera.Constants.Type.back
 							);
 						}}
-						title={"Flip"}
+						title={'Flip'}
 						textStyle={styles.text}
-					/>
+					> <MaterialCommunityIcons name='camera-burst' size={25} color={'#fff'} /> </Button>
 					<Button
-						style={styles.button}
+						style={[styles.button, {width: 80}]}
 						onPress={takePicture}
-						title="Tirar"
+						title='Tirar'
 						textStyle={styles.text}
-					/>
+					> <MaterialCommunityIcons name='camera-iris' size={40} color={'#fff'} /> </Button>
 					<Button
 						style={styles.button}
 						onPress={() => {
@@ -72,9 +83,9 @@ const BookCamera = ({ active }) => {
 									: Camera.Constants.Type.back
 							);
 						}}
-						title={"Flip"}
+						title='Flip'
 						textStyle={styles.text}
-					/>
+					> <MaterialIcons name='flip-camera-android' size={25} color={'#fff'} /> </Button>
 				</View>
 			</Camera>
 		</View>
@@ -84,35 +95,51 @@ const BookCamera = ({ active }) => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: "#fff",
-		height: "100%",
-		alignItems: "center",
-		justifyContent: "center",
+		backgroundColor: '#fff',
+		height: '100%',
+		alignItems: 'center',
+		justifyContent: 'center',
 	},
 	camera: {
 		flex: 1,
-		width: "100%",
-		height: "100%",
+		width: '100%',
+		height: '100%',
 	},
 	buttonContainer: {
-		position: "absolute",
+		position: 'absolute',
 		bottom: 0,
-		height: 100,
-		width: "100%",
-		flex: 1,
-		flexDirection: "row",
-		justifyContent: "space-around",
-		alignItems: "center",
-		alignSelf: "center",
-        backgroundColor: theme.colors.red100
+		width: '100%',
+		height: '10%',
+		flexDirection: 'row',
+		justifyContent: 'space-around',
+		alignItems: 'center',
+		alignSelf: 'center',
+        backgroundColor: 'transparent'
 	},
 	button: {
-		alignItems: "center",
-		justifyContent: "center",
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+		height: 50,
 		width: 50,
+		backgroundColor: 'transparent',
+		borderWidth: 0,
 	},
 	text: {
-		color: "#fff",
+		color: '#fff',
+	},
+	camMask: {
+		borderWidth: 2,
+		borderColor: 'rgba(255, 255, 255, 0.5)',
+		backgroundColor: 'transparent',
+		width: 241,
+		height: 346,
+		alignSelf: 'center',
+		margin: 150,
+	},
+	imagePreview: {
+		width: 241,
+		height: 346,
 	}
 });
 export default BookCamera;

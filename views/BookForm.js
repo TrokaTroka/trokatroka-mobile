@@ -4,26 +4,19 @@ import { StyleSheet, Text, View, TextInput, Platform } from "react-native";
 import Card from "../components/Card";
 
 import { theme } from "../styles/theme.js";
-import BookCamera from "../components/Camera";
 
 const BookForm = ({ id, navigation, route }) => {
 	
-	const [active, setActive] = useState(false);
-
-	const stateCamera = (state) => {
-		navigation.navigate("BookCamera", { state });
-	}
 
 	return (
 		<View style={styles.container}>
 			<View style={styles.form}>
 				<Text style={styles.label}>Cadastre livros para trocar</Text>
-				<Card onPress={() => stateCamera(true)}>
+				<Card onPress={() => navigation.navigate("BookCamera")}>
 					<View>
 						<Text style={{alignItems: 'center', color: theme.colors.red80 }}>
 							Clique aqui para adicionar fotos
 						</Text>
-						<BookCamera active={active} />
 					</View>
 				</Card>
 				<TextInput placeholder="Título" style={styles.input} multiline={true} maxLength={80}/>
