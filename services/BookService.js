@@ -1,6 +1,6 @@
 import api from "axios";
 
-const API_URL = "http://localhost:3004/book";
+const API_URL = "https://trokatroka.com:2096/book";
 
 const saveBook = (book) => {
 	if (book.id !== undefined) return api.post(API_URL, book);
@@ -16,7 +16,7 @@ const deleteBookById = (id) => {
 }
 
 const getBooks = () => {
-	return api.get(API_URL);
+	return api.get(`${API_URL}/all`);
 }
 
 export default { saveBook, getBookById, deleteBookById, getBooks };

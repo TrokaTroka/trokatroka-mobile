@@ -16,7 +16,7 @@ const Button = ({ onPress, title, name, style, textStyle, color, children}) => {
 					...btnStyles[name ? name : "primary"],
 				},
 				style,
-			] }
+			]}
 		>
 			<Text style={[textStyle, color ? {color: color} : {}]} >{children ? children : title}</Text>
 		</Pressable>
@@ -46,6 +46,9 @@ const btnStyles = {
 		width: defaultProps.width,
 		height: defaultProps.height,
 	},
+	icon: {
+		padding: 0
+	}
 };
 
 

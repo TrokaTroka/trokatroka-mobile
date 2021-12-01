@@ -1,14 +1,23 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Button from "../components/Button"
-import logo from '../assets/logo.svg'
+import { useRoute } from "@react-navigation/core";
+import { connect } from "react-redux";
+import {bookFilter} from "../redux/filters/BookFilter";
+import { getBookById } from "../redux/actions/BookAction";
 
-const TradeDetails = ({ id, navigation, route }) => {
+const TradeDetails = ({getBookById, bookItem}) => {
+	const {params} = useRoute();
+	useEffect(() => {
+		getBookById(params.id);
+	}, [])
 
 	return (
 		<View style={styles.container}>
-            <Text>adnmai0dna</Text>
+            <Text>{bookItem.title}</Text>
+            <Text>{bookItem.author}</Text>
+
 		</View>
 	);
 };
@@ -24,4 +33,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default TradeDetails;
+export default connect(bookFilter, {getBookById})(TradeDetails);

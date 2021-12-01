@@ -24,8 +24,8 @@ const BookList = ( { getBooks, bookList, filter }) => {
 		getBooks();
 	}, []);
 
-	const showDetails = (id) => {
-		navigation.navigate("TradeDetails", { user: { id: id } });
+	const showDetails = ({id}) => {
+		navigation.navigate("TradeDetails", { id: id });
 	};
 
 	const renderItem = ({ item }) => {
@@ -41,9 +41,13 @@ const BookList = ( { getBooks, bookList, filter }) => {
 				</View>
 				<View style={styles.infoContainer}>
 					<Text style={styles.bookTitle} numberOfLines={2}>{item.title}</Text>
+					<View style={styles.moreInfoContainer}>
+						<Text style={styles.bookAuthor} numberOfLines={1}>{item.author}</Text>
+						<Text style={styles.bookCategory} numberOfLines={1}>Categoria</Text>
+					</View>
 					<View style={styles.userDetails}>
-						<Rating value={item.user.rating} />
-						<Text style={styles.userName} numberOfLines={1}>{item.user.name}</Text>
+						<Rating style={{justifyContent: "flex-end"}}value={item.user ? item.user.rating : 0} />
+						<Text style={styles.userName} numberOfLines={1}>{item.user ? item.user.name : ''}</Text>
 					</View>
 				</View>
 			</Card>
@@ -81,6 +85,12 @@ const styles = StyleSheet.create({
 		alignItems: "flex-start",
 		width: "70%",
 	},
+	moreInfoContainer: {
+		flexGrow: 1,
+		width: '100%',
+		alignItems: "flex-end",
+		justifyContent: "space-around",
+	},
 	imageContainer: {
 		width: "30%",
 		justifyContent: "center",
@@ -98,17 +108,27 @@ const styles = StyleSheet.create({
 		alignSelf: "flex-end",
 	},
 	userName: {
+		display: "flex",
         overflow: "hidden",
 		width: "70%",
-		color: "#9e9e9e"
+		color: "#9e9e9e",
 	},
 	bookTitle: {
         overflow: "hidden",
 		fontWeight: "bold",
-		fontSize: 12,
+		fontSize: 14,
 		width: "100%",
 		flex: 2,
 		marginTop: 3,
+	},
+	bookAuthor: {
+		overflow: "hidden",
+		fontSize: 12,
+	},
+	bookCategory: {
+		overflow: "hidden",
+		fontSize: 12,
+		fontStyle: "italic",
 	},
 	bookDescription: {
 		flex: 3,

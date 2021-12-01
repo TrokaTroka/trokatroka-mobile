@@ -1,12 +1,9 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
 	StyleSheet,
-	Text,
 	View,
 	TextInput,
-	FlatList,
-	SafeAreaView,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import BookList from "../components/BookList";

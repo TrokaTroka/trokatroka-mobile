@@ -16,7 +16,7 @@ const Authentication = ({ navigation, route }) => {
 			<View style={styles.inputSection}>
 				<Image source={logo} />
 				<TextInput style={styles.input} placeholder="E-mail" onChangeText={onChangeUsername}/>
-				<TextInput style={styles.input} placeholder="Password" onChangeText={onChangePassword}/>
+				<TextInput style={styles.input} placeholder="Password" onChangeText={onChangePassword} secureTextEntry={true}/>
 				<Pressable title="Sign In"/>
 				<Button onPress= {handleLogin} style={styles.btn} color="white" title="Sign In"/>
 				<Button name="secondary" onPress= {() => {console.log("teste")}} style={styles.btn} color="#EF5D60" title="Sign Up"/>
