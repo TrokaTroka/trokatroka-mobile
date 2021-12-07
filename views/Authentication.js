@@ -1,25 +1,53 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TextInput, Pressable, Image} from "react-native";
-import Button from "../components/Button"
-import logo from '../assets/logo.svg'
+import { StyleSheet, View, TextInput, Pressable } from "react-native";
+import Button from "../components/Button";
+import { theme } from "../styles/theme";
+import { connect } from "react-redux";
+import { authFilter } from "../redux/filters/AuthFilter";
+import { login } from "../redux/actions/AuthAction";
 
-const Authentication = ({ navigation, route }) => {
+const Authentication = ({ auth, login, navigation }) => {
 	const [username, onChangeUsername] = useState(null);
 	const [password, onChangePassword] = useState(null);
-
+	const [error, setError] = useState(null);
 	const handleLogin = () => {
-		console.log(`Username ${username} password: ${password}`);
-		navigation.navigate("HomeTabs", { username: username });
+		login(username, password)
+		.then(() => navigation.navigate("HomeTabs"))
+	};
+
+	const handleSignup = () => {
+		navigation.navigate("Signup");
 	};
 	return (
 		<View style={styles.container}>
 			<View style={styles.inputSection}>
-				<Image source={logo} />
-				<TextInput style={styles.input} placeholder="E-mail" onChangeText={onChangeUsername}/>
-				<TextInput style={styles.input} placeholder="Password" onChangeText={onChangePassword} secureTextEntry={true}/>
-				<Pressable title="Sign In"/>
-				<Button onPress= {handleLogin} style={styles.btn} color="white" title="Sign In"/>
-				<Button name="secondary" onPress= {() => {console.log("teste")}} style={styles.btn} color="#EF5D60" title="Sign Up"/>
+				<TextInput
+					style={styles.input}
+					placeholder="E-mail"
+					onChangeText={onChangeUsername}
+				/>
+				<TextInput
+					style={styles.input}
+					placeholder="Password"
+					onChangeText={onChangePassword}
+					secureTextEntry={true}
+				/>
+				<Pressable title="Sign In" />
+				<Button
+					onPress={handleLogin}
+					style={styles.btn}
+					color="white"
+					title="Sign In"
+				/>
+				<Button
+					name="secondary"
+					onPress={() => {
+						console.log("teste");
+					}}
+					style={styles.btn}
+					color="#EF5D60"
+					title="Sign Up"
+				/>
 			</View>
 		</View>
 	);
@@ -44,7 +72,7 @@ const styles = StyleSheet.create({
 		alignSelf: "center",
 		alignItems: "center",
 		marginBottom: "100%",
-		marginTop: "25%"
+		marginTop: "25%",
 	},
 	input: {
 		height: 50,
@@ -60,9 +88,8 @@ const styles = StyleSheet.create({
 	},
 	btn: {
 		margin: 10,
-		height: 50
+		height: 50,
 	},
-
 });
 
-export default Authentication;
+export default connect(authFilter, { login })(Authentication);

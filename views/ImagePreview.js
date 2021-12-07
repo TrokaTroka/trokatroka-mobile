@@ -9,7 +9,7 @@ const ImagePreview = ({images, onClose}) => {
 	const [selected, setSelected] = useState(0);
 
 	useEffect(() => {
-		setSelected(images[0] ? images[0].id : 0);
+		setSelected(0);
 	}, [images]);
 
 	const renderItem = ({item, index }) => {
@@ -19,10 +19,17 @@ const ImagePreview = ({images, onClose}) => {
 			</Card>
 		);
 	}
+
+	const deletePhoto = () => {
+		images.splice(selected, 1);
+		setSelected(0);
+	}
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.selectedImageContainer}>
-				<Button name="icon" style={styles.btn} onPress={() => onClose()}><Ionicons name="close" size={24} color="white" /></Button>
+				<Button name="icon" style={styles.btn} onPress={() => onClose()}><Ionicons name="close" size={25} color="white" /></Button>
+				<Button name="icon" style={styles.btn} onPress={() => deletePhoto()}><Ionicons name="trash-outline" size={25} color="white" /></Button>
 				<Image source={images[selected]} style={styles.selectedImage} />
 			</View>
 			<FlatList

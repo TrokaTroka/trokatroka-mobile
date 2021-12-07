@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useEffect } from "react";
 import {
 	StyleSheet,
 	View,
@@ -9,11 +9,17 @@ import { Ionicons } from "@expo/vector-icons";
 import BookList from "../components/BookList";
 
 import { connect } from "react-redux";
-import {bookFilter} from "../redux/filters/BookFilter";
+import {categoryFilter} from "../redux/filters/CategoryFilter";
+import { getCategories } from "../redux/actions/CategoryAction";
+import CategorySelectableList from "../components/CategorySelectableList";
 
-const Home = ({navigation}) => {
+const Home = ({auth, categoryList, getCategories}) => {
 
 	const [filter, setFilter] = React.useState("");
+
+	useEffect(() => {
+		getCategories();
+	},[]);
 
 	return (
 		<View style={styles.container}>
@@ -30,6 +36,7 @@ const Home = ({navigation}) => {
 					color={"#000"}
 				/>
 			</View>
+			<CategorySelectableList style={styles.categoryList}/>
 			<BookList filter={filter} />
 		</View>
 	);
@@ -71,8 +78,12 @@ const styles = StyleSheet.create({
 		backgroundColor: "#fff",
 		color: "#424242",
 	},
+	categoryList: {
+		position: "absolute",
+		top: 120
+	}
 });
 
 
 
-export default connect(bookFilter, {})(Home);
+export default connect(categoryFilter, {getCategories})(Home);

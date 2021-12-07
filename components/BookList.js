@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
 	StyleSheet,
@@ -11,7 +11,7 @@ import {
 //REDUX
 import { bookFilter } from "../redux/filters/BookFilter";
 import { getBooks } from "../redux/actions/BookAction";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 
 import Card from "../components/Card";
 import Rating from "../components/Rating";
@@ -21,8 +21,10 @@ const BookList = ( { getBooks, bookList, filter }) => {
 
 	const navigation = useNavigation();
 
-	React.useEffect(() => {
-		getBooks();
+	const {auth} = useSelector(state => state.authState);
+
+	useEffect(() => {
+		getBooks(auth);
 	}, []);
 
 	const showDetails = ({id}) => {

@@ -18,7 +18,7 @@ const Button = ({ onPress, title, name, style, textStyle, color, children}) => {
 				style,
 			]}
 		>
-			<Text style={[textStyle, color ? {color: color} : {}]} >{children ? children : title}</Text>
+			{children ? children : (<Text style={[textStyle, color ? {color: color} : {color:  btnStyles[name ? name : "primary"].textColor}]} >{title}</Text>)}
 		</Pressable>
 	);
 };
@@ -34,6 +34,7 @@ const btnStyles = {
 		color: "white",
 		width: defaultProps.width,
 		height: defaultProps.height,
+		textColor: "white",
 	},
 	secondary: {
 		alignItems: "center",
@@ -45,6 +46,7 @@ const btnStyles = {
 		color: "white",
 		width: defaultProps.width,
 		height: defaultProps.height,
+		textColor: theme.colors.red100,
 	},
 	icon: {
 		padding: 0

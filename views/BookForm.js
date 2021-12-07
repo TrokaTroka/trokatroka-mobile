@@ -2,11 +2,12 @@ import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TextInput, Platform } from "react-native";
 import Card from "../components/Card";
-
+import { useNavigation } from "@react-navigation/core";
+import CategorySelectableList from "../components/CategorySelectableList";
 import { theme } from "../styles/theme.js";
 
-const BookForm = ({ id, navigation, route }) => {
-	
+const BookForm = ({ }) => {
+	const navigation = useNavigation();
 
 	return (
 		<View style={styles.container}>
@@ -21,6 +22,8 @@ const BookForm = ({ id, navigation, route }) => {
 				</Card>
 				<TextInput placeholder="Título" style={styles.input} multiline={true} maxLength={80}/>
 				<TextInput placeholder="Motivo" style={styles.input} multiline={true} maxLength={100}/>
+				<Text style={styles.text}>Selecione as categorias do livro:</Text>
+				<CategorySelectableList />
 			</View>
 		</View>
 	);
@@ -55,6 +58,14 @@ const styles = StyleSheet.create({
 		padding: 5,
 		margin: 5,
 	},
+	text: {
+		fontSize: 18,
+		fontWeight: "bold",
+		alignItems: "center",
+		color: theme.colors.darkRed,
+		marginTop: 20,
+		marginBottom: 10,
+	}
 });
 
 export default BookForm;

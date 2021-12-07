@@ -1,4 +1,4 @@
-import BookService from "../../services/BookService";
+import bookService from "../../services/BookService";
 
 export const BOOK_ACTIONS = {
 	GET_BOOKS: "GET_BOOKS",
@@ -8,9 +8,9 @@ export const BOOK_ACTIONS = {
 	FILTER_BOOK: "FILTER_BOOK",
 };
 
-export function getBooks() {
+export function getBooks(auth) {
 	return (dispatch) => {
-		BookService.getBooks().then((response) =>
+		bookService.getBooks(auth).then((response) =>
 			dispatch({
 				type: BOOK_ACTIONS.GET_BOOKS,
 				content: response.data.result,
@@ -19,9 +19,9 @@ export function getBooks() {
 	};
 }
 
-export function getBookById(id) {
+export function getBookById(id, auth) {
 	return (dispatch) => {
-		BookService.getBookById(id).then((response) =>
+		bookService.getBookById(id, auth).then((response) =>
 			dispatch({
 				type: BOOK_ACTIONS.GET_BOOK_BY_ID,
 				content: response.data.result.shift(),
@@ -30,9 +30,9 @@ export function getBookById(id) {
 	};
 }
 
-export function saveBook(book) {
+export function saveBook(book, auth) {
     return (dispatch) => {
-        BookService.saveBook(book).then((response) =>
+        bookService.saveBook(book, auth).then((response) =>
             dispatch({
                 type: BOOK_ACTIONS.SAVE_BOOK,
                 content: response.data,
