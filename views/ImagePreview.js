@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from "react";
 import { StyleSheet, Image, View, FlatList, Text } from "react-native";
-import Card from "../components/Card";
+import {Card, Button} from "../components/";
 import { theme } from "../styles/theme";
 import { Ionicons } from '@expo/vector-icons'; 
-import Button from "../components/Button";
 
 const ImagePreview = ({images, onClose}) => {
 	const [selected, setSelected] = useState(0);

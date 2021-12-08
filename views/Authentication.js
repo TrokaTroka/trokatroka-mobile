@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View, TextInput, Pressable } from "react-native";
-import Button from "../components/Button";
+import {Button} from "../components";
 import { theme } from "../styles/theme";
 import { connect } from "react-redux";
 import { userFilter } from "../redux/filters/UserFilter";

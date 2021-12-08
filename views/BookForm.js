@@ -1,13 +1,22 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TextInput, Platform } from "react-native";
-import Card from "../components/Card";
+import {Card, CategorySelector, Button} from "../components/";
 import { useNavigation } from "@react-navigation/core";
-import CategorySelectableList from "../components/CategorySelectableList";
 import { theme } from "../styles/theme.js";
 
 const BookForm = ({ }) => {
 	const navigation = useNavigation();
+	const [categoriesId, setCategoriesId] = useState([]);
+
+	const toggleCategory = (id) => {
+		if(categoriesId.includes(id)) {
+			setCategoriesId(categoriesId.filter(categoryId => categoryId !== id));
+		} else {
+			setCategoriesId([...categoriesId, id]);
+		}
+		console.log(categoriesId)
+	}
 
 	return (
 		<View style={styles.container}>
@@ -23,7 +32,8 @@ const BookForm = ({ }) => {
 				<TextInput placeholder="Título" style={styles.input} multiline={true} maxLength={80}/>
 				<TextInput placeholder="Motivo" style={styles.input} multiline={true} maxLength={100}/>
 				<Text style={styles.text}>Selecione as categorias do livro:</Text>
-				<CategorySelectableList />
+				<CategorySelector onToggleCategory={toggleCategory}/>
+				<Button />
 			</View>
 		</View>
 	);

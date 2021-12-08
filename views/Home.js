@@ -6,14 +6,19 @@ import {
 	TextInput,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import BookList from "../components/BookList";
+import {BookList, CategorySelector} from "../components/";
 
 import { connect } from "react-redux";
 import {bookFilter} from "../redux/filters/BookFilter";
+import {categoryFilter} from "../redux/filters/CategoryFilter";
 import { getBooksByIdsCategory } from "../redux/actions/BookAction";
-import CategorySelectableList from "../components/CategorySelectableList";
+import { toggleCategory } from "../redux/actions/CategoryAction";
 
-const Home = ({getBooksByIdsCategory }) => {
+const mapStateToProps = () => {
+	return {bookFilter, categoryFilter}
+}
+
+const Home = ({getBooksByIdsCategory, toggleCategory }) => {
 
 	const [filter, setFilter] = React.useState("");
 
@@ -32,7 +37,7 @@ const Home = ({getBooksByIdsCategory }) => {
 					color={"#000"}
 				/>
 			</View>
-			<CategorySelectableList style={styles.categoryList} afterToggleCategory={() => getBooksByIdsCategory()}/>
+			<CategorySelector style={styles.categoryList} onToggleCategory={toggleCategory} afterToggleCategory={() => getBooksByIdsCategory()} renderCategoriesSelecteds/>
 			<BookList filter={filter} />
 		</View>
 	);
@@ -82,4 +87,4 @@ const styles = StyleSheet.create({
 
 
 
-export default connect(bookFilter, {getBooksByIdsCategory})(Home);
+export default connect(mapStateToProps, {getBooksByIdsCategory, toggleCategory})(Home);

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, Modal, Image } from 'react-native';
 import { Camera } from 'expo-camera';
 import { theme } from '../styles/theme';
-import Button from '../components/Button';
+import {Button} from '../components';
 import {MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'; 
 import {useNavigation} from '@react-navigation/native';
 import ImagePreview from './ImagePreview';
