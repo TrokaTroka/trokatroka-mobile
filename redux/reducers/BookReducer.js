@@ -13,6 +13,11 @@ export default function bookReducer(state = bookState, dispatch) {
 				...state,
 				bookList: dispatch.content,
 			};
+		case BOOK_ACTIONS.GET_BOOKS_BY_IDS_CATEGORY:
+			return {
+				...state,
+				bookList: dispatch.content,
+			};	
 		case BOOK_ACTIONS.GET_BOOK_BY_ID:
 			return {
 				...state,

@@ -9,17 +9,13 @@ import { Ionicons } from "@expo/vector-icons";
 import BookList from "../components/BookList";
 
 import { connect } from "react-redux";
-import {categoryFilter} from "../redux/filters/CategoryFilter";
-import { getCategories } from "../redux/actions/CategoryAction";
+import {bookFilter} from "../redux/filters/BookFilter";
+import { getBooksByIdsCategory } from "../redux/actions/BookAction";
 import CategorySelectableList from "../components/CategorySelectableList";
 
-const Home = ({auth, categoryList, getCategories}) => {
+const Home = ({getBooksByIdsCategory }) => {
 
 	const [filter, setFilter] = React.useState("");
-
-	useEffect(() => {
-		getCategories();
-	},[]);
 
 	return (
 		<View style={styles.container}>
@@ -36,7 +32,7 @@ const Home = ({auth, categoryList, getCategories}) => {
 					color={"#000"}
 				/>
 			</View>
-			<CategorySelectableList style={styles.categoryList}/>
+			<CategorySelectableList style={styles.categoryList} afterToggleCategory={() => getBooksByIdsCategory()}/>
 			<BookList filter={filter} />
 		</View>
 	);
@@ -86,4 +82,4 @@ const styles = StyleSheet.create({
 
 
 
-export default connect(categoryFilter, {getCategories})(Home);
+export default connect(bookFilter, {getBooksByIdsCategory})(Home);

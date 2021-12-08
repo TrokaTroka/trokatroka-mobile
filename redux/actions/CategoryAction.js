@@ -9,8 +9,8 @@ export const CATEGORY_ACTIONS = {
 };
 
 export function getCategories() {
-	return (dispatch) => {
-		categoryService.getCategories().then((response) =>
+	return (dispatch, getState) => {
+		categoryService.getCategories(getState().userState).then((response) =>
 			dispatch({
 				type: CATEGORY_ACTIONS.GET_CATEGORIES,
 				content: response.data.result,
@@ -20,8 +20,8 @@ export function getCategories() {
 }
 
 export function getCategoryById(id) {
-	return (dispatch) => {
-		categoryService.getCategoryById(id).then((response) =>
+	return (dispatch, getState) => {
+		categoryService.getCategoryById(id, getState().userState).then((response) =>
 			dispatch({
 				type: CATEGORY_ACTIONS.GET_CATEGORY_BY_ID,
 				content: response.data.result.shift(),
@@ -31,8 +31,8 @@ export function getCategoryById(id) {
 }
 
 export function persistCategory(category) {
-    return (dispatch) => {
-        categoryService.persistCategory(category).then((response) =>
+    return (dispatch, getState) => {
+        categoryService.persistCategory(category, getState().userState).then((response) =>
             dispatch({
                 type: CATEGORY_ACTIONS.PERSIST_CATEGORY,
                 content: response.data.result.shift(),

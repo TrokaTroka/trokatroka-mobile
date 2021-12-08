@@ -10,15 +10,17 @@ import BookCamera from "./views/BookCamera";
 import {Provider} from "react-redux";
 import {store, persistor} from './redux/store';
 import { PersistGate } from "redux-persist/integration/react";
-
+import { ActivityIndicator } from "react-native";
+import { theme } from "./styles/theme";
 
 const Stack = createNativeStackNavigator();
 const App = () => {
+
 	return (
 		<Provider store={store}>
-			<PersistGate loading={null} persistor={persistor} >
+			<PersistGate loading={<ActivityIndicator color={theme.colors.red100}/>} persistor={persistor} >
 				<NavigationContainer>
-					<Stack.Navigator initialRouteName="Authentication" screenOptions={{headerShown: false}}>
+					<Stack.Navigator initialRouteName= "Authentication" screenOptions={{headerShown: false}}>
 							<Stack.Screen name="Authentication" component={Authentication} />
 							<Stack.Screen name="HomeTabs" component={HomeTabs} />
 							<Stack.Screen name="TradeDetails" component={TradeDetails} options={{headerShown: true, headerTitle: "Detalhes"}} />

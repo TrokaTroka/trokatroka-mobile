@@ -21,10 +21,8 @@ const BookList = ( { getBooks, bookList, filter }) => {
 
 	const navigation = useNavigation();
 
-	const {auth} = useSelector(state => state.authState);
-
 	useEffect(() => {
-		getBooks(auth);
+		getBooks();
 	}, []);
 
 	const showDetails = ({id}) => {

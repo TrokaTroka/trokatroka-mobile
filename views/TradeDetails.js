@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Button from "../components/Button"
 import { useRoute } from "@react-navigation/core";
-import { connect } from "react-redux";
+import { connect, useSelector} from "react-redux";
 import {bookFilter} from "../redux/filters/BookFilter";
 import { getBookById } from "../redux/actions/BookAction";
 

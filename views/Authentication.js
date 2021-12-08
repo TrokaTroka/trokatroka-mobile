@@ -1,23 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View, TextInput, Pressable } from "react-native";
 import Button from "../components/Button";
 import { theme } from "../styles/theme";
 import { connect } from "react-redux";
-import { authFilter } from "../redux/filters/AuthFilter";
-import { login } from "../redux/actions/AuthAction";
+import { userFilter } from "../redux/filters/UserFilter";
+import { login } from "../redux/actions/UserAction";
 
-const Authentication = ({ auth, login, navigation }) => {
-	const [username, onChangeUsername] = useState(null);
-	const [password, onChangePassword] = useState(null);
-	const [error, setError] = useState(null);
+const Authentication = ({ login, userAuth, navigation }) => {
+	const [username, onChangeUsername] = useState("string");
+	const [password, onChangePassword] = useState("string");
+	const [loading, setLoading] = useState(false);
 	const handleLogin = () => {
-		login(username, password)
-		.then(() => navigation.navigate("HomeTabs"))
+		if(!loading) {
+			setLoading(true);
+			login(username, password)
+			.then(() => navigation.navigate("HomeTabs"))
+		}
 	};
+
+	useEffect(() => {
+		if(userAuth !== null) {
+			navigation.navigate("HomeTabs")
+		}	
+	}, []);
 
 	const handleSignup = () => {
 		navigation.navigate("Signup");
 	};
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.inputSection}>
@@ -25,12 +35,14 @@ const Authentication = ({ auth, login, navigation }) => {
 					style={styles.input}
 					placeholder="E-mail"
 					onChangeText={onChangeUsername}
+					defaultValue={"string"}
 				/>
 				<TextInput
 					style={styles.input}
 					placeholder="Password"
 					onChangeText={onChangePassword}
 					secureTextEntry={true}
+					defaultValue={"string"}
 				/>
 				<Pressable title="Sign In" />
 				<Button
@@ -42,7 +54,7 @@ const Authentication = ({ auth, login, navigation }) => {
 				<Button
 					name="secondary"
 					onPress={() => {
-						console.log("teste");
+						handleSignup();
 					}}
 					style={styles.btn}
 					color="#EF5D60"
@@ -92,4 +104,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default connect(authFilter, { login })(Authentication);
+export default connect(userFilter, { login })(Authentication);

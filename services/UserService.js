@@ -19,4 +19,10 @@ const getUsers = () => {
 	return api.get(`${API_URL}/all`);
 }
 
-export default { persistUser, getUserById, deleteUserById, getUsers };
+const login = (email, password) => {
+	console.log({email, password});
+	return api.post(`${API_URL}/auth`, {email, password});
+}
+
+
+export default { persistUser, getUserById, deleteUserById, getUsers, login };

@@ -6,7 +6,7 @@ import { categoryFilter } from "../redux/filters/CategoryFilter";
 import { toggleCategory, getCategories } from "../redux/actions/CategoryAction";
 import {theme} from "../styles/theme"
 
-const CategorySelectableList = ({ getCategories, categoryList, categoriesSelected, toggleCategory, style }) => {
+const CategorySelectableList = ({ getCategories, categoryList, categoriesSelected, toggleCategory, style, afterToggleCategory }) => {
 
     const renderItem = ({ item }) => {
         return (
@@ -16,6 +16,7 @@ const CategorySelectableList = ({ getCategories, categoryList, categoriesSelecte
 
     const onPress = ({id}) => {
         toggleCategory(id);
+        afterToggleCategory();
     }
 
     useEffect(() => {
