@@ -21,14 +21,14 @@ const ImagePreview = ({images, onClose}) => {
 
 	const deletePhoto = () => {
 		images.splice(selected, 1);
-		setSelected(0);
+		setSelected(images[1]);
 	}
 
 	return (
 		<View style={styles.container}>
 			<View style={styles.selectedImageContainer}>
-				<Button name="icon" style={styles.btn} onPress={() => onClose()}><Ionicons name="close" size={25} color="white" /></Button>
-				<Button name="icon" style={styles.btn} onPress={() => deletePhoto()}><Ionicons name="trash-outline" size={25} color="white" /></Button>
+				<Button name="icon" style={styles.closeButton} onPress={() => onClose()}><Ionicons name="close" size={25} color="white" /></Button>
+				<Button name="icon" style={styles.deleteButton} onPress={() => deletePhoto()}><Ionicons name="trash-outline" size={25} color="white" /></Button>
 				<Image source={images[selected]} style={styles.selectedImage} />
 			</View>
 			<FlatList
@@ -83,13 +83,22 @@ const styles = StyleSheet.create({
 		resizeMode: "cover",
 		zIndex: -1,
 	},
-	btn: {
+	closeButton: {
 		position: 'absolute', 
 		top: 50,
 		zIndex: 1, 
 		width: 50,
 		height: 50
+	},
+	deleteButton: {
+		position: 'absolute', 
+		top: 50,
+		right: 50,
+		zIndex: 1, 
+		width: 50,
+		height: 50
 	}
+	
 });
 
 export default ImagePreview;

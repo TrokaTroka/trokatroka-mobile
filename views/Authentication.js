@@ -1,50 +1,59 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View, TextInput, Pressable } from "react-native";
-import {Button} from "../components";
+import { StyleSheet, View, TextInput, Image, Dimensions} from "react-native";
+import { Asset } from "expo-asset";
+import { Button } from "../components";
 import { theme } from "../styles/theme";
 import { connect } from "react-redux";
 import { userFilter } from "../redux/filters/UserFilter";
-import { login } from "../redux/actions/UserAction";
+import { login, setLoading } from "../redux/actions/UserAction";
+import Loading from "./Loading";
 
-const Authentication = ({ login, userAuth, navigation }) => {
-	const [username, onChangeUsername] = useState("string");
-	const [password, onChangePassword] = useState("string");
-	const [loading, setLoading] = useState(false);
+const Authentication = ({
+	isLoading,
+	setLoading,
+	login,
+	userAuth,
+	navigation,
+}) => {
+	const [username, onChangeUsername] = useState("teste@gmail.com");
+	const [password, onChangePassword] = useState("doidera");
 	const handleLogin = () => {
-		if(!loading) {
-			setLoading(true);
-			login(username, password)
-			.then(() => navigation.navigate("HomeTabs"))
-		}
+		setLoading(true);
+		login(username, password).then(() => navigation.navigate("HomeTabs"));
 	};
 
 	useEffect(() => {
-		if(userAuth !== null) {
-			navigation.navigate("HomeTabs")
-		}	
+		setLoading(false);
 	}, []);
 
 	const handleSignup = () => {
 		navigation.navigate("Signup");
 	};
 
-	return (
+	return isLoading ? (
+		<Loading />
+	) : (
 		<View style={styles.container}>
+			<View style={styles.logo}>
+				<Image
+					style={{ width: 250, height: 250 }}
+					source={Asset.fromModule(require("../assets/images/logo512.png"))}
+				/>
+			</View>
 			<View style={styles.inputSection}>
 				<TextInput
 					style={styles.input}
 					placeholder="E-mail"
 					onChangeText={onChangeUsername}
-					defaultValue={"string"}
+					defaultValue={"teste@gmail.com"}
 				/>
 				<TextInput
 					style={styles.input}
 					placeholder="Password"
 					onChangeText={onChangePassword}
 					secureTextEntry={true}
-					defaultValue={"string"}
+					defaultValue={"doidera"}
 				/>
-				<Pressable title="Sign In" />
 				<Button
 					onPress={handleLogin}
 					style={styles.btn}
@@ -67,24 +76,23 @@ const Authentication = ({ login, userAuth, navigation }) => {
 
 const styles = StyleSheet.create({
 	container: {
+		display: "flex",
 		backgroundColor: "#fff",
-		height: "100%",
-		width: "100%",
-		flex: 1,
-		flexDirection: "column",
-		justifyContent: "flex-start",
+		display: "flex",
+		justifyContent: "center",
 		alignItems: "center",
+		width: Dimensions.get("window").width,
+		height: Dimensions.get("window").height,
+	},
+	logo: {
+		
 	},
 	inputSection: {
+		justifyContent: "center",
+		alignItems: "center",
 		backgroundColor: "#fff",
 		height: "50%",
 		width: "100%",
-		flex: 1,
-		justifyContent: "center",
-		alignSelf: "center",
-		alignItems: "center",
-		marginBottom: "100%",
-		marginTop: "25%",
 	},
 	input: {
 		height: 50,
@@ -104,4 +112,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default connect(userFilter, { login })(Authentication);
+export default connect(userFilter, { login, setLoading })(Authentication);

@@ -12,7 +12,7 @@ import {
 import { bookFilter } from "../redux/filters/BookFilter";
 import { getBooks } from "../redux/actions/BookAction";
 import { connect, useSelector } from "react-redux";
-
+import {Asset} from 'expo-asset';
 import Card from "../components/Card";
 import Rating from "../components/Rating";
 import { useNavigation } from '@react-navigation/native';
@@ -44,10 +44,10 @@ const BookList = ( { getBooks, bookList, filter }) => {
 					<Text style={styles.bookTitle} numberOfLines={2}>{item.title}</Text>
 					<View style={styles.moreInfoContainer}>
 						<Text style={styles.bookAuthor} numberOfLines={1}>{item.author}</Text>
-						<Text style={styles.bookCategory} numberOfLines={1}>Categoria</Text>
+						<Text style={styles.bookCategory} numberOfLines={1}>{item.categories.map(category => category.name)}</Text>
 					</View>
 					<View style={styles.userDetails}>
-						<Rating style={{justifyContent: "flex-end"}}value={item.user ? item.user.rating : 0} />
+						<Rating style={{justifyContent: "flex-end"}}value={item.user ? item.user.totalRate : 0} />
 						<Text style={styles.userName} numberOfLines={1}>{item.user ? item.user.name : ''}</Text>
 					</View>
 				</View>

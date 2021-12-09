@@ -13,12 +13,13 @@ import {bookFilter} from "../redux/filters/BookFilter";
 import {categoryFilter} from "../redux/filters/CategoryFilter";
 import { getBooksByIdsCategory } from "../redux/actions/BookAction";
 import { toggleCategory } from "../redux/actions/CategoryAction";
+import Loading from "./Loading";
 
 const mapStateToProps = () => {
 	return {bookFilter, categoryFilter}
 }
 
-const Home = ({getBooksByIdsCategory, toggleCategory }) => {
+const Home = ({isLoading, getBooksByIdsCategory, toggleCategory }) => {
 
 	const [filter, setFilter] = React.useState("");
 
@@ -37,7 +38,7 @@ const Home = ({getBooksByIdsCategory, toggleCategory }) => {
 					color={"#000"}
 				/>
 			</View>
-			<CategorySelector style={styles.categoryList} onToggleCategory={toggleCategory} afterToggleCategory={() => getBooksByIdsCategory()} renderCategoriesSelecteds/>
+			{isLoading ? (<Loading />): (<CategorySelector style={styles.categoryList} onToggleCategory={toggleCategory} afterToggleCategory={() => getBooksByIdsCategory()} renderCategoriesSelecteds/>)}
 			<BookList filter={filter} />
 		</View>
 	);

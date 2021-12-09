@@ -7,6 +7,7 @@ export const USER_ACTIONS = {
 	DELETE_USER: "DELETE_USER",
 	LOGIN_SUCESS: "LOGIN_SUCESS",
 	LOGIN_FAILURE: "LOGIN_FAILURE",
+	SET_LOADING: "SET_LOADING",
 };
 
 export function getUsers() {
@@ -46,7 +47,7 @@ export function persistUser(user) {
 export function login(email, password) {
 	return (dispatch) => {
 		return new Promise((resolve, reject) => {
-			userService.login(email, password).then((response) => {
+			setTimeout(() => {userService.login(email, password).then((response) => {
 				if (response.status === 200) {
 					dispatch({
 						type: USER_ACTIONS.LOGIN_SUCESS,
@@ -56,11 +57,20 @@ export function login(email, password) {
 				} else {
 					dispatch({
 						type: USER_ACTIONS.LOGIN_FAILURE,
-						content: {token: '', type:''}
+						content: {token: '', type:''},
 					});
 					reject('Login failed')
 				}
-			})
+			})}, 3000);
+		});
+	};
+}
+
+export function setLoading(loading) {
+	return (dispatch) => {
+		dispatch({ 
+			type: USER_ACTIONS.SET_LOADING, 
+			content: loading 
 		});
 	};
 }

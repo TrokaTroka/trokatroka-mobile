@@ -5,5 +5,6 @@ export const userFilter = ({userState}) => {
         userList: values(userState.userList),
         userItem: userState.userItem,
         userAuth: userState.userAuth,
+        isLoading: userState.isLoading,
     }
 }
